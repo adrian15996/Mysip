@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #ffffff;
+  background-image: url("../assets/background-xx2.jpg");
+}
+
+@media (max-width: 640px) {
+  .container {
+    background-image: url("../assets/background-x1.jpg");
+  }
+}
+
+.message {
+  z-index: 2;
+  align-self: flex-end;
+  width: auto;
+  height: 30px;
+  padding: 15px;
+  background-color: #8c8c8c;
+  margin-bottom: 5px;
+}
+
+.title {
+  align-self: center;
+  font-size: 3rem;
+}
+
+.data {
+  align-self: center;
+  padding: 15px;
+  width: auto;
+  height: 30px;
+  background-color: #8c8c8c;
+}

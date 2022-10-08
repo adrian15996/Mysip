@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import "../styles/ProductItem.css";
-
 const ProductItem = ({ product }) => {
   return (
     <div className="ProductItem">

@@ -1,4 +1,36 @@
 .container {
   display: flex;
+  justify-content: space-evenly;
+  height: 100px;
+  width: 100%;
+  background-color: #8c8c8c;
+  align-items: center;
+  padding: 0;
+}
+
+.politicsContainer {
+  display: flex;
+  align-items: center;
+}
+
+.containerIcon {
+  display: flex;
   justify-content: space-between;
+}
+
+.containerIcon a {
+  color: black;
+  margin-left: 20px;
+}
+
+.icon {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .politicsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

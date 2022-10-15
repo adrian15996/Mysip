@@ -4,7 +4,7 @@ import styles from "../styles/services.module.css";
 
 export const Products = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <h2 className={styles.title}>Productos</h2>
       <ProductList />
     </div>

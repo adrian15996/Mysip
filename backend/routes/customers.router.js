@@ -1,69 +1,59 @@
 const express = require('express');
-const router = express.Router();
-const CustomerService = require('../services/customer.service');
-const validatorHandler = require('../middlewares/validator.handler');
+
+const CustomerService = require('../services/customers.service');
+const validationHandler = require('../middlewares/validator.handler');
 const {
-  getCustomerSchema,
   createCustomerSchema,
+  getCustomerSchema,
   updateCustomerSchema,
-} = require('../schema/customer.schema');
+} = require('../schemas/customer.schema');
 
+const router = express.Router();
 const service = new CustomerService();
-router.get(
-  '/:id',
-  validatorHandler(getCustomerSchema, 'params'),
-  async (req, res) => {
-    const { id } = req.params;
-    const response = await service.findOne(id);
-    res.status(200).json({
-      response,
-    });
-  }
-);
 
-router.get('/', async (req, res) => {
-  const rta = await service.find();
-  res.json(rta);
+router.get('/',  async (req, res, next) => {
+  try {
+    res.json(await service.find());
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.post(
-  '/',
-  validatorHandler(createCustomerSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const rta = await service.create(body);
-    res.status(201).json({
-      message: 'User was created',
-      rta,
-    });
+router.post('/',
+  validationHandler(createCustomerSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      res.status(201).json(await service.create(body));
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
-router.put(
-  '/:id',
-  validatorHandler(getCustomerSchema, 'params'),
-  validatorHandler(updateCustomerSchema, 'body'),
-  async (req, res) => {
-    const { id } = req.params;
-    const body = req.body;
-    const rta = await service.update(id, body);
-    res.json({
-      message: 'Updated',
-      data: rta,
-      id,
-    });
+router.patch('/:id',
+  validationHandler(getCustomerSchema, 'params'),
+  validationHandler(updateCustomerSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      res.status(201).json(await service.update(id, body));
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
-router.delete(
-  '/:id',
-  validatorHandler(getCustomerSchema, 'params'),
-  async (req, res) => {
-    const { id } = req.params;
-    const message = await service.delete(id);
-    res.status(200).json({
-      message,
-    });
+router.delete('/:id',
+  validationHandler(getCustomerSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      res.status(200).json(await service.delete(id));
+    } catch (error) {
+      next(error);
+    }
   }
 );
 

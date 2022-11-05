@@ -1,38 +1,41 @@
 {
-  "name": "backend-mysip",
+  "name": "my-store",
   "version": "1.0.0",
-  "description": "backend del proyecto para la empresa de mysip",
+  "description": "",
   "main": "index.js",
-  "author": "adrian valencia hernandez <adrian15996@gmail.com>",
-  "license": "MIT",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
     "lint": "eslint",
     "migrations:generate": "sequelize-cli migration:generate --name",
     "migrations:run": "sequelize-cli db:migrate",
-    "migrations:revert": "sequelize-cli db:migrate:undo"
+    "migrations:revert": "sequelize-cli db:migrate:undo",
+    "migrations:delete": "sequelize-cli db:migrate:undo:all"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2"
   },
   "dependencies": {
-    "@hapi/boom": "^10.0.0",
+    "@hapi/boom": "^9.1.4",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.1",
-    "faker": "5.5.3",
-    "joi": "^17.6.1",
-    "pg": "^8.8.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "faker": "^5.5.3",
+    "joi": "^17.4.2",
+    "mysql2": "^2.3.0",
+    "pg": "^8.7.1",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.23.2",
-    "sequelize-cli": "^6.5.1"
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0"
   },
   "engines": {
-    "node": "16.17.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.23.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "nodemon": "^2.0.19",
-    "prettier": "^2.7.1"
+    "node": "14.x"
   }
 }

@@ -1,82 +1,55 @@
 const express = require('express');
-const router = express.Router();
-const CustomerService = require('../services/order.service');
+
+const OrderService = require('../services/order.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const {
   getOrderSchema,
   createOrderSchema,
   addItemSchema,
-} = require('../schema/order.schema');
+} = require('../schemas/order.schema');
 
-const service = new CustomerService();
-
-router.post(
-  '/addItem',
-  validatorHandler(addItemSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const rta = await service.addItem(body);
-    res.status(201).json({
-      rta,
-    });
-  }
-);
+const router = express.Router();
+const service = new OrderService();
 
 router.get(
   '/:id',
   validatorHandler(getOrderSchema, 'params'),
-  async (req, res) => {
-    const { id } = req.params;
-    const response = await service.findOne(id);
-    res.status(200).json({
-      response,
-    });
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const order = await service.findOne(id);
+      res.json(order);
+    } catch (error) {
+      next(error);
+    }
   }
 );
-
-router.get('/', async (req, res) => {
-  const rta = await service.find();
-  res.json(rta);
-});
 
 router.post(
   '/',
   validatorHandler(createOrderSchema, 'body'),
-  async (req, res) => {
-    const body = req.body;
-    const rta = await service.create(body);
-    res.status(201).json({
-      message: 'Order was created',
-      rta,
-    });
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newOrder = await service.create(body);
+      res.status(201).json(newOrder);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 
-router.put(
-  '/:id',
-  validatorHandler(getOrderSchema, 'params'),
-  validatorHandler(createOrderSchema, 'body'),
-  async (req, res) => {
-    const { id } = req.params;
-    const body = req.body;
-    const rta = await service.update(id, body);
-    res.json({
-      message: 'Updated',
-      data: rta,
-      id,
-    });
-  }
-);
-
-router.delete(
-  '/:id',
-  validatorHandler(getOrderSchema, 'params'),
-  async (req, res) => {
-    const { id } = req.params;
-    const message = await service.delete(id);
-    res.status(200).json({
-      message,
-    });
+router.post(
+  '/add-item',
+  validatorHandler(addItemSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newItem = await service.addItem(body);
+      res.status(201).json(newItem);
+    } catch (error) {
+      next(error);
+    }
   }
 );
 

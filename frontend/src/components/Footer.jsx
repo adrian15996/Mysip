@@ -8,7 +8,7 @@ export const Footer = () => {
   return (
     <footer className={styles.container}>
       <div>
-        <img src={Logo} alt="Logo" className="nav-logo" />
+        <img src={Logo} alt="Logo" className={styles.navLogo} />
       </div>
       <div className={styles.politicsContainer}>
         <a href="/">Politicas de Privacidad</a>

@@ -3,7 +3,7 @@
   justify-content: space-evenly;
   height: 100px;
   width: 100%;
-  background-color: #8c8c8c;
+  background-color: #1976d2;
   align-items: center;
   padding: 0;
 }
@@ -11,8 +11,14 @@
 .politicsContainer {
   display: flex;
   align-items: center;
+  color: #fff;
 }
 
+.politicsContainer a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
 .containerIcon {
   display: flex;
   justify-content: space-between;
@@ -27,6 +33,9 @@
   font-size: 1.5rem;
 }
 
+.navLogo {
+  width: 120px;
+}
 @media (max-width: 640px) {
   .politicsContainer {
     display: flex;
